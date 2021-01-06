@@ -1,3 +1,8 @@
+import axios from './axios.min.js'
+import {urls} from './usrs.js'
+
+Vue.prototype.$http = axios
+
 // Full spec-compliant TodoMVC with localStorage persistence
 // and hash-based routing in ~150 lines.
 
@@ -20,7 +25,12 @@ var todoStorage = {
 // visibility filters
 var filters = {
     all: function (todos) {
-        return todos
+        this.$http.get(urls.all)
+            .then(function(res){
+                return res.data;
+            }).catch(function(err){
+                console.log(err);
+            })
     },
     active: function (todos) {
         return todos.filter(function (todo) {
@@ -75,11 +85,11 @@ var app = new Vue({
         }
     },
 
-    filters: {
-        pluralize: function (n) {
-            return n === 1 ? 'item' : 'items'
-        }
-    },
+    // filters: {
+    //     pluralize: function (n) {
+    //         return n === 1 ? 'item' : 'items'
+    //     }
+    // },
 
     // methods that implement data logic.
     // note there's no DOM manipulation here at all.
@@ -89,11 +99,16 @@ var app = new Vue({
             if (!value) {
                 return
             }
-            this.todos.push({
-                id: todoStorage.uid++,
-                title: value,
-                completed: false
+
+            this.$http.post(urls.work,{
+                title: 'abc',
+                description: 'haha'
+            }).then(function(res){
+                console.log(res);
+            }).catch(function(err){
+                console.log(err);
             })
+
             this.newTodo = ''
         },
 

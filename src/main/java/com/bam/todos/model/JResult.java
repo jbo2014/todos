@@ -3,7 +3,8 @@ package com.bam.todos.model;
 import lombok.Data;
 
 @Data
-public class JResult {
+public class JResult<T> {
     private int code;
-    private Object msg;
+    private String msg;
+    private T data;
 }
