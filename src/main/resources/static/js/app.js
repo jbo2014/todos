@@ -1,7 +1,14 @@
-import axios from './axios.min.js'
-import {urls} from './usrs.js'
+// const base = "/work";
+// const urls = {
+//     work: base,
+//     all: base+'/all',
+//     doing: base+'/doing',
+//     active: base+'/active',
+//     finish: base+'/completed',
+//
+// }
 
-Vue.prototype.$http = axios
+// Vue.prototype.$http = axios
 
 // Full spec-compliant TodoMVC with localStorage persistence
 // and hash-based routing in ~150 lines.
@@ -25,12 +32,13 @@ var todoStorage = {
 // visibility filters
 var filters = {
     all: function (todos) {
-        this.$http.get(urls.all)
-            .then(function(res){
-                return res.data;
-            }).catch(function(err){
-                console.log(err);
-            })
+        // this.$http.get(urls.all)
+        //     .then(function(res){
+        //         return res.data;
+        //     }).catch(function(err){
+        //         console.log(err);
+        //     })
+        return todos;
     },
     active: function (todos) {
         return todos.filter(function (todo) {
@@ -100,14 +108,22 @@ var app = new Vue({
                 return
             }
 
-            this.$http.post(urls.work,{
+            // this.$http.post(urls.work,{
+            //     title: 'abc',
+            //     description: 'haha'
+            // }).then(function(res){
+            //     console.log(res);
+            // }).catch(function(err){
+            //     console.log(err);
+            // })
+            httpPost(urls.work, {
                 title: 'abc',
                 description: 'haha'
-            }).then(function(res){
+            }).then(res=>{
                 console.log(res);
-            }).catch(function(err){
+            }).catch(err=>{
                 console.log(err);
-            })
+            });
 
             this.newTodo = ''
         },

@@ -1,6 +1,6 @@
 const base = '/work';
 
-export const urls = {
+const urls = {
     work: base,
     all: base+'/all',
     doing: base+'/doing',
